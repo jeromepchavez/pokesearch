@@ -1,10 +1,11 @@
-import './App.css'
+import { Input } from '@chakra-ui/react';
 
 function App() {
 
   return (
     <div>
-      <h1>Hello World!</h1>
+      <h1>PokeSearch!</h1>
+      <Input />
     </div>
   )
 }
