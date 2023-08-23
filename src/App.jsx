@@ -6,15 +6,26 @@ function App() {
   const [pokemonNames, setPokemonNames] = useState([]);
 
   useEffect(() => {
-    axios.get('https://pokeapi.co/api/v2/pokemon?limit=1100')
-      .then(response => {
-        const names = response.data.results.map(pokemon => pokemon.name)
-        setPokemonNames(names);
-      })
-      .catch(error => {
+    const fetchData = async () => {
+      let allNames = [];
+      let nextUrl = 'https://pokeapi.co/api/v2/pokemon?limit=20'; 
+
+      try {
+        while (nextUrl) {
+          const response = await axios.get(nextUrl);
+          const names = response.data.results.map(pokemon => pokemon.name);
+          allNames = allNames.concat(names);
+          nextUrl = response.data.next;
+        }
+        setPokemonNames(allNames);
+      } catch (error) {
         console.error('Error fetching Pokemon names:', error);
-      });
-  })
+      }
+    };
+
+    fetchData();
+  }, []);
+  
   return (
     <Box>
       <h1>PokeSearch!</h1>
