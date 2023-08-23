@@ -25,16 +25,11 @@ function App() {
 
     fetchData();
   }, []);
-  
+
   return (
     <Box>
       <h1>PokeSearch!</h1>
       <Input />
-      <ul>
-        {pokemonNames.map((name, index) => (
-          <li key={index}>{name}</li>
-        ))}
-      </ul>
     </Box>
   )
 }
