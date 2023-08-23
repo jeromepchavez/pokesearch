@@ -10,9 +10,11 @@ const PokemonDetail = ({ pokemon }) => {
     <div>
       <h2>{pokemon.name}</h2>
       <img src={pokemon.imageUrl} alt={pokemon.name} />
+      <img src={pokemon.shinyUrl} alt={pokemon.name} />
       <div>Type: {pokemon.type}</div>
       <div>Height: {pokemon.height}</div>
       <div>Weight: {pokemon.weight}</div>
+      <div>ID: {pokemon.pokemonID}</div>
     </div>
   );
 };

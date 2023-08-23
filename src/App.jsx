@@ -1,5 +1,5 @@
 // App.js
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import SearchBar from './components/SearchBar';
 import PokemonDetail from './components/PokemonDetail';
@@ -10,12 +10,15 @@ const App = () => {
   const handleSearch = async (searchQuery) => {
     try {
       const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${searchQuery.toLowerCase()}`);
+      console.log(response.data)
       const pokemon = {
         name: response.data.name,
         type: response.data.types[0].type.name,
         height: response.data.height,
         weight: response.data.weight,
-        imageUrl: response.data.sprites.front_default,
+        imageUrl: response.data.sprites.other["official-artwork"].front_default,
+        shinyUrl: response.data.sprites.other["official-artwork"].front_shiny,
+        pokemonID: response.data.id
       };
       setSelectedPokemon(pokemon);
     } catch (error) {
