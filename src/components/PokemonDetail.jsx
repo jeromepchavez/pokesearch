@@ -16,6 +16,7 @@ const PokemonDetail = ({ pokemon }) => {
       <div>Weight: {pokemon.weight}</div>
       <div>ID: {pokemon.pokemonID}</div>
       <div>Pokedex: {pokemon.pokedexEntry}</div>
+      <div>Generation: {pokemon.generation}</div>
     </div>
   );
 };

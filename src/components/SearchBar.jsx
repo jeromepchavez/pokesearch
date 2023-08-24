@@ -20,7 +20,7 @@ const SearchBar = ({ onSearch }) => {
                     type='text'
                     value={searchQuery}
                     onChange={handleInputChange}
-                    placeholder="Search Pokemon by name..."
+                    placeholder="Search Pokemon by name or id..."
                 />
             </Center>
             <Button onClick={handleSearch}>Search</Button>

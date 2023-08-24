@@ -1,6 +1,7 @@
 // App.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Heading } from '@chakra-ui/react';
 import SearchBar from './components/SearchBar';
 import PokemonDetail from './components/PokemonDetail';
 
@@ -10,7 +11,7 @@ const App = () => {
   const handleSearch = async (searchQuery) => {
     try {
       const response1 = await axios.get(`https://pokeapi.co/api/v2/pokemon/${searchQuery.toLowerCase()}`);
-      const response2 = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${response1.data.id}`)
+      const response2 = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${searchQuery.toLowerCase()}`);
       console.log(response2.data)
       const pokemon = {
         name: response1.data.name,
@@ -21,6 +22,7 @@ const App = () => {
         shinyUrl: response1.data.sprites.other["official-artwork"].front_shiny,
         pokemonID: response1.data.id,
         pokedexEntry: response2.data.flavor_text_entries[0].flavor_text,
+        generation: response2.data.generation.name,
       };
       setSelectedPokemon(pokemon);
     } catch (error) {
@@ -31,7 +33,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Pokémon Search App</h1>
+      <Heading>Pokémon Search App</Heading>
       <SearchBar onSearch={handleSearch} />
       <PokemonDetail pokemon={selectedPokemon} />
     </div>
