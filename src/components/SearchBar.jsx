@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Input, Button } from '@chakra-ui/react';
+import { Box, Input, Button, Center } from '@chakra-ui/react';
 
 
 const SearchBar = ({ onSearch }) => {
@@ -14,13 +14,15 @@ const SearchBar = ({ onSearch }) => {
     }
 
     return (
-        <Box>
-            <Input
-                type='text'
-                value={searchQuery}
-                onChange={handleInputChange}
-                placeholder="Search Pokemon by name..."
-            />
+        <Box width='600px'>
+            <Center>
+                <Input
+                    type='text'
+                    value={searchQuery}
+                    onChange={handleInputChange}
+                    placeholder="Search Pokemon by name..."
+                />
+            </Center>
             <Button onClick={handleSearch}>Search</Button>
         </Box>
     )

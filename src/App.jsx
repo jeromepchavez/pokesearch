@@ -9,16 +9,18 @@ const App = () => {
 
   const handleSearch = async (searchQuery) => {
     try {
-      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${searchQuery.toLowerCase()}`);
-      console.log(response.data)
+      const response1 = await axios.get(`https://pokeapi.co/api/v2/pokemon/${searchQuery.toLowerCase()}`);
+      const response2 = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${response1.data.id}`)
+      console.log(response2.data)
       const pokemon = {
-        name: response.data.name,
-        type: response.data.types[0].type.name,
-        height: response.data.height,
-        weight: response.data.weight,
-        imageUrl: response.data.sprites.other["official-artwork"].front_default,
-        shinyUrl: response.data.sprites.other["official-artwork"].front_shiny,
-        pokemonID: response.data.id
+        name: response1.data.name,
+        type: response1.data.types[0].type.name,
+        height: response1.data.height,
+        weight: response1.data.weight,
+        imageUrl: response1.data.sprites.other["official-artwork"].front_default,
+        shinyUrl: response1.data.sprites.other["official-artwork"].front_shiny,
+        pokemonID: response1.data.id,
+        pokedexEntry: response2.data.flavor_text_entries[0].flavor_text,
       };
       setSelectedPokemon(pokemon);
     } catch (error) {
