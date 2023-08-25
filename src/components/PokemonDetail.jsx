@@ -9,7 +9,8 @@ import {
           CardBody,
           CardFooter,
           HStack,
-          Image
+          Image,
+          Badge
         } from '@chakra-ui/react';
 
 const PokemonDetail = ({ pokemon }) => {
@@ -20,14 +21,18 @@ const PokemonDetail = ({ pokemon }) => {
   return (
     <Box>
       <Center>
-        <Card maxWidth='1000px'>
+        <Card boxShadow='dark-lg' maxWidth='1000px'>
           <CardHeader>
             <Center>
               <Heading>{pokemon.name.toUpperCase()}</Heading>
             </Center>
           </CardHeader>
           <CardBody>
-            <HStack spacing='30px' justifyContent='center'>
+            <HStack spacing='400px' justifyContent='center'>
+              <Badge>ORIGINAL</Badge>
+              <Badge colorScheme='purple'>SHINY</Badge>
+            </HStack>
+            <HStack margin ='10px' spacing='30px' justifyContent='center'>
               <Image boxSize='400px' src={pokemon.imageUrl} alt={pokemon.name} />
               <Image boxSize='400px' src={pokemon.shinyUrl} alt={pokemon.name} />
             </HStack>

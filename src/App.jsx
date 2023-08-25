@@ -26,6 +26,7 @@ export default function App() {
     try {
       const response1 = await axios.get(`https://pokeapi.co/api/v2/pokemon/${searchQuery.toLowerCase()}`);
       const response2 = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${searchQuery.toLowerCase()}`);
+      console.log(response1.data, response2.data)
       const pokemon = {
         name: response1.data.name,
         type: response1.data.types[0].type.name,
@@ -47,7 +48,7 @@ export default function App() {
   return (
     <Box>
       <Center>
-        <Heading size='2xl' margin='20px'>Pokémon Search App</Heading>
+        <Heading textShadow='1px 1px #00ff00' size='2xl' margin='20px'>Pokémon Search App</Heading>
       </Center>
       <SearchBar onSearch={handleSearch} />
       <PokemonDetail pokemon={selectedPokemon} />
