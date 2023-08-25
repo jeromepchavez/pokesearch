@@ -19,7 +19,6 @@ const App = () => {
         result = item.flavor_text;
       }
     });
-    console.log(result)
     return result;
   }
 
@@ -27,7 +26,6 @@ const App = () => {
     try {
       const response1 = await axios.get(`https://pokeapi.co/api/v2/pokemon/${searchQuery.toLowerCase()}`);
       const response2 = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${searchQuery.toLowerCase()}`);
-      console.log(response2.data.flavor_text_entries)
       const pokemon = {
         name: response1.data.name,
         type: response1.data.types[0].type.name,
