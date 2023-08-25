@@ -15,16 +15,19 @@ const SearchBar = ({ onSearch }) => {
 
     return (
         <Box>
-            <Box width='600px' position='relative'>
-                <Center height='100px'>
+            <Box>
+                <Center>
                     <Input
                         type='text'
+                        maxWidth='1000px'
+                        margin="20px"
                         value={searchQuery}
                         onChange={handleInputChange}
                         placeholder="Search Pokemon by name or id..."
                     />
+                    <Button onClick={handleSearch}>Search</Button>
                 </Center>
-                <Button onClick={handleSearch}>Search</Button>
+
             </Box>
         </Box>
     )

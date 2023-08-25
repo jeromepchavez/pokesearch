@@ -1,11 +1,11 @@
 // App.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Heading, Center } from '@chakra-ui/react';
 import SearchBar from './components/SearchBar';
 import PokemonDetail from './components/PokemonDetail';
 
-const App = () => {
+export default function App() {
   const [selectedPokemon, setSelectedPokemon] = useState(null);
 
   /*
@@ -34,9 +34,8 @@ const App = () => {
         imageUrl: response1.data.sprites.other["official-artwork"].front_default,
         shinyUrl: response1.data.sprites.other["official-artwork"].front_shiny,
         pokemonID: response1.data.id,
-        pokedexEntry: response2.data.flavor_text_entries[0].flavor_text,
         generation: response2.data.generation.name,
-        pokedexEntry2: findEnglishFlavorText(response2.data.flavor_text_entries),
+        pokedexEntry: findEnglishFlavorText(response2.data.flavor_text_entries),
       };
       setSelectedPokemon(pokemon);
     } catch (error) {
@@ -47,11 +46,12 @@ const App = () => {
 
   return (
     <Box>
-      <Heading>Pokémon Search App</Heading>
+      <Center>
+        <Heading size='2xl' margin='20px'>Pokémon Search App</Heading>
+      </Center>
       <SearchBar onSearch={handleSearch} />
       <PokemonDetail pokemon={selectedPokemon} />
     </Box>
   );
 };
 
-export default App;
