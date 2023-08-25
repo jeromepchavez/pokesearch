@@ -18,6 +18,11 @@ const PokemonDetail = ({ pokemon }) => {
     return <Center margin="20px">No Pokémon selected.</Center>;
   }
 
+  //Height is given in decimeters. Function to convert to feet/inches.
+  const calculateHeight = () => {
+
+  };
+
   return (
     <Box>
       <Center>
