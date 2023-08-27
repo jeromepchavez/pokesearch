@@ -32,10 +32,9 @@ const PokemonDetail = ({ pokemon }) => {
     <Box>
       <Center>
         <Card boxShadow='dark-lg' maxWidth='1000px'>
-          <Tabs variant='enclosed'>
+          <Tabs isFitted variant='enclosed-colored' size='lg'>
             <TabList>
               <Tab>INFO</Tab>
-              <Tab>Two</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
@@ -53,16 +52,15 @@ const PokemonDetail = ({ pokemon }) => {
                     <Image boxSize='400px' src={pokemon.imageUrl} alt={pokemon.name} />
                     <Image boxSize='400px' src={pokemon.shinyUrl} alt={pokemon.name} />
                   </HStack>
-                  <div>Type: {pokemon.type}</div>
+                  <div>Type: {pokemon.type.map((type, index) => (
+                    <div key={index}>{type.type.name.toUpperCase()}</div>
+                    ))}</div>
                   <div>Height: {calculateFeet(pokemon.height)}' {calculateInches(pokemon.height)}"</div>
                   <div>Weight: {pokemon.weight}</div>
                   <div>ID: {pokemon.pokemonID}</div>
                   <div>Pokedex: {pokemon.pokedexEntry}</div>
                   <div>Generation: {pokemon.generation}</div>
                 </CardBody>
-              </TabPanel>
-              <TabPanel>
-                <p>two!</p>
               </TabPanel>
             </TabPanels>
           </Tabs>

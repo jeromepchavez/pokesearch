@@ -29,7 +29,7 @@ export default function App() {
       console.log(response1.data, response2.data)
       const pokemon = {
         name: response1.data.name,
-        type: response1.data.types[0].type.name,
+        type: response1.data.types,
         height: response1.data.height,
         weight: response1.data.weight,
         imageUrl: response1.data.sprites.other["official-artwork"].front_default,
@@ -38,6 +38,7 @@ export default function App() {
         generation: response2.data.generation.name,
         pokedexEntry: findEnglishFlavorText(response2.data.flavor_text_entries),
       };
+      console.log(pokemon)
       setSelectedPokemon(pokemon);
     } catch (error) {
       console.error('Error fetching Pokémon:', error);
@@ -48,7 +49,7 @@ export default function App() {
   return (
     <Box>
       <Center>
-        <Heading textShadow='1px 1px #00ff00' size='2xl' margin='20px'>Pokémon Search App</Heading>
+        <Heading textShadow='1px 1px #ff0000' size='2xl' margin='20px'>Pokémon Search App</Heading>
       </Center>
       <SearchBar onSearch={handleSearch} />
       <PokemonDetail pokemon={selectedPokemon} />
