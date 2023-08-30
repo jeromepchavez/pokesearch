@@ -8,8 +8,10 @@ import {
           CardHeader,
           CardBody,
           HStack,
+          VStack,
           Image,
-          Badge
+          Badge,
+          Tag
         } from '@chakra-ui/react';
 import '../css/pokemontype.css'
 
@@ -77,26 +79,26 @@ const PokemonDetail = ({ pokemon }) => {
             </Center>
           </CardHeader>
           <CardBody>
-            <HStack spacing='400px' justifyContent='center'>
-              <Badge>ORIGINAL</Badge>
-              <Badge colorScheme='purple'>SHINY</Badge>
-            </HStack>
             <HStack margin ='10px' spacing='30px' justifyContent='center'>
-              <Image boxSize='400px' src={pokemon.imageUrl} alt={pokemon.name} />
-              <Image boxSize='400px' src={pokemon.shinyUrl} alt={pokemon.name} />
+              <VStack>
+                <Badge>ORIGINAL</Badge>
+                <Image boxSize='400px' src={pokemon.imageUrl} alt={pokemon.name} />
+              </VStack>
+              <VStack>
+                <Badge colorScheme='purple'>SHINY</Badge>
+                <Image boxSize='400px' src={pokemon.shinyUrl} alt={pokemon.name} />
+              </VStack>
             </HStack>
-            <div>Type: {pokemon.type.map((type) => (
-              <div>
-                <div key={type.slot}>
-                  {type.type.name.toUpperCase()}
-                  <img 
-                    className={type.type.name + " icon"} 
-                    src={renderPokemonType(type.type.name)} 
-                    alt={type.type.name} 
-                  />
-                </div>
-              </div> 
-              ))}</div>
+            <HStack width="200px" marginBottom="50px" spacing={2}>{pokemon.type.map((type) => (
+              <VStack key={type.slot} className={"icon " + type.type.name}>
+                <Image 
+                  src={renderPokemonType(type.type.name)} 
+                  alt={type.type.name} 
+                />
+                <Tag key={type.slot}>{type.type.name.toUpperCase()}</Tag>
+              </VStack>
+              ))}
+            </HStack>
             <div>Height: {calculateFeetInches(pokemon.height)}</div>
             <div>Weight: {
               //Weight from the GET call is in hectograms. Converting to pounds
