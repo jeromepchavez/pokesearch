@@ -1,6 +1,11 @@
-# React + Vite
+# PokeSearch App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Pokemon Search application utilizing the PokeAPI for content informaiton
+
+Technologies used:
+React
+Chakra UI
+Axios
 
 Currently, two official plugins are available:
 
