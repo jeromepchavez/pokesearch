@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Box, Heading, Center } from '@chakra-ui/react';
 import SearchBar from './components/SearchBar';
 import PokemonDetail from './components/PokemonDetail';
+import './css/App.css';
 
 export default function App() {
   const [selectedPokemon, setSelectedPokemon] = useState(null);
@@ -47,7 +48,7 @@ export default function App() {
   };
 
   return (
-    <Box>
+    <Box className='body'>
       <Center>
         <Heading textShadow='1px 1px #ff0000' size='2xl' margin='20px'>Pokémon Search App</Heading>
       </Center>

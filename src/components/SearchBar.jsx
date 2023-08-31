@@ -26,7 +26,7 @@ const SearchBar = ({ onSearch }) => {
                         onChange={handleInputChange}
                         placeholder="Search Pokemon by name or id..."
                     />
-                    <Button boxShadow='md' onClick={handleSearch}>Search</Button>
+                    <Button colorScheme='red' boxShadow='md' onClick={handleSearch}>Search</Button>
                 </Center>
 
             </Box>

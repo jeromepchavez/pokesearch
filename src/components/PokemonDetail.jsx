@@ -27,6 +27,14 @@ const PokemonDetail = ({ pokemon }) => {
     return feet+ `'` + inches + `"`
   };
 
+  const renderShiny = (shinyUrl) => {
+    if (!shinyUrl) {
+      return <Heading size='md' boxSize='400px'>No Shiny Form Available</Heading>;
+    } else {
+      return <Image borderRadius='5%' backgroundColor='#DEDEDE' boxSize='400px' src={pokemon.shinyUrl} alt={pokemon.name} />;
+    }
+  }
+
   //Function that also returns the corresponding image of the Pokemon type
   const renderPokemonType = (type) => {
     switch(type) {
@@ -82,14 +90,14 @@ const PokemonDetail = ({ pokemon }) => {
             <HStack margin ='10px' spacing='30px' justifyContent='center'>
               <VStack>
                 <Badge>ORIGINAL</Badge>
-                <Image boxSize='400px' src={pokemon.imageUrl} alt={pokemon.name} />
+                <Image  borderRadius='5%' backgroundColor='#DEDEDE' boxSize='400px' src={pokemon.imageUrl} alt={pokemon.name} />
               </VStack>
               <VStack>
                 <Badge colorScheme='purple'>SHINY</Badge>
-                <Image boxSize='400px' src={pokemon.shinyUrl} alt={pokemon.name} />
+                { renderShiny(pokemon.shinyUrl) }
               </VStack>
             </HStack>
-            <HStack width="200px" marginBottom="50px" spacing={2}>{pokemon.type.map((type) => (
+            <HStack width="200px" marginBottom="50px" marginTop='25px' spacing={2}>{pokemon.type.map((type) => (
               <VStack key={type.slot} className={"icon " + type.type.name}>
                 <Image 
                   src={renderPokemonType(type.type.name)} 
