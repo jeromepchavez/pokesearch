@@ -12,11 +12,21 @@ export default function App() {
   Flavor text entries from the api can come in different languages. 
   This function returns the first one translated in english.
   */
-  const findEnglishFlavorText = (arr) => {
+  const findEnglishFlavorText = (array) => {
     let result = null;
-    arr.forEach(item => {
+    array.forEach(item => {
       if (item.language.name === 'en') {
         result = item.flavor_text;
+      }
+    });
+    return result;
+  }
+
+  const findEnglishClassification = (array) => {
+    let result = null;
+    array.forEach(item => {
+      if (item.language.name === 'en') {
+        result = item.genus;
       }
     });
     return result;
@@ -38,6 +48,7 @@ export default function App() {
         generation: response2.data.generation.name,
         pokedexEntry: findEnglishFlavorText(response2.data.flavor_text_entries),
         foreignNames: response2.data.names.slice(0, 3),
+        classification: findEnglishClassification(response2.data.genera),
       };
       console.log(pokemon)
       setSelectedPokemon(pokemon);

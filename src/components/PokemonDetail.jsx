@@ -5,14 +5,15 @@ import {
           Center, 
           Box,
           Card,
-          CardHeader,
+          Flex,
           CardBody,
           HStack,
           VStack,
           Image,
           Badge,
           Tag,
-          Text
+          Text,
+          Spacer,
         } from '@chakra-ui/react';
 import '../css/pokemontype.css'
 
@@ -36,7 +37,7 @@ const PokemonDetail = ({ pokemon }) => {
     )
   };
   //API returns weight in hectograms. Will convert to pounds and kilograms
- const calculateWeights = (weight) => {
+  const calculateWeights = (weight) => {
     const pounds = (weight / 4.536).toFixed(1);
     const kilograms = (weight / 10).toFixed(1);
     return (
@@ -46,6 +47,19 @@ const PokemonDetail = ({ pokemon }) => {
       </Box>
     );
   }
+  //displaying list of the Pokemon name in other languages
+  const renderForeignNames = (arrayOfNames) => {
+    return (
+      <VStack margin='20px'>
+        <Heading size='sm'>Japanese: </Heading>
+        <Text fontSize='xs'>{arrayOfNames[0].name}</Text>
+        <Text fontSize='xs'>{arrayOfNames[1].name}</Text>
+        <Heading size='sm'>Korean: </Heading>
+        <Text fontSize='xs'>{arrayOfNames[2].name}</Text>
+      </VStack>
+    );
+  }
+  //Conditional rendering of Shiny version if it exists or not
   const renderShiny = (shinyUrl) => {
     if (!shinyUrl) {
       return <Heading size='md' boxSize='400px' marginTop='20px' textAlign='center'>No Shiny Form Available</Heading>;
@@ -53,7 +67,6 @@ const PokemonDetail = ({ pokemon }) => {
       return <Image borderRadius='5%' backgroundColor='#DEDEDE' boxSize='400px' src={pokemon.shinyUrl} alt={pokemon.name} />;
     }
   }
-
   //Function that also returns the corresponding image of the Pokemon type
   const renderPokemonType = (type) => {
     switch(type) {
@@ -100,11 +113,6 @@ const PokemonDetail = ({ pokemon }) => {
     <Box>
       <Center>
         <Card boxShadow='dark-lg' border="10px solid #DEDEDE" maxWidth='1000px'>
-          <CardHeader>
-            <Heading>
-              {pokemon.name.toUpperCase()}
-            </Heading>
-          </CardHeader>
           <CardBody>
             <HStack margin ='10px' spacing='30px' justifyContent='center'>
               <VStack>
@@ -116,15 +124,26 @@ const PokemonDetail = ({ pokemon }) => {
                 { renderShiny(pokemon.shinyUrl) }
               </VStack>
             </HStack>
-            <HStack width="200px" marginBottom="50px" marginTop='25px' spacing={2}>{pokemon.type.map((type) => (
-              <VStack key={type.slot} className={"icon " + type.type.name}>
-                <Image 
-                  src={renderPokemonType(type.type.name)} 
-                  alt={type.type.name} 
-                />
-                <Tag key={type.slot}>{type.type.name.toUpperCase()}</Tag>
-              </VStack>
-              ))}
+            <HStack margin='10px'>
+              <Center>
+                <VStack margin='10px'>
+                  <Heading>{pokemon.name.toUpperCase()}</Heading>
+                  <Text>{pokemon.classification}</Text>
+                </VStack>
+              </Center>
+              <Spacer />
+              {renderForeignNames(pokemon.foreignNames)}
+              <Spacer />
+              <HStack width="200px" marginBottom="50px" marginTop='25px' spacing={2}>{pokemon.type.map((type) => (
+                <VStack key={type.slot} className={"icon " + type.type.name}>
+                  <Image 
+                    src={renderPokemonType(type.type.name)} 
+                    alt={type.type.name} 
+                  />
+                  <Tag key={type.slot}>{type.type.name.toUpperCase()}</Tag>
+                </VStack>
+                ))}
+              </HStack>
             </HStack>
             <Box>Height: {calculateHeights(pokemon.height)}</Box>
             <Box>Weight: {calculateWeights(pokemon.weight)}</Box>
