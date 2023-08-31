@@ -22,9 +22,11 @@ const PokemonDetail = ({ pokemon }) => {
 
   //Height is given in decimeters. Function to convert to feet/inches. divide height by 3.048
   const calculateFeetInches = (height) => {
-    let feet = Math.floor(height / 3.048)
-    let inches = parseFloat((height % 3.048).toFixed(2))
-    return feet+ `'` + inches + `"`
+    const decimeterToFoot = 1/3.048;
+    const feetWithInch = height * decimeterToFoot;
+    const feet = feetWithInch - feetWithInch % 1;
+    const inches = Math.round(feetWithInch % 1 * 12);
+    return feet + `' ` + inches + `"` 
   };
 
   const renderShiny = (shinyUrl) => {
@@ -80,7 +82,7 @@ const PokemonDetail = ({ pokemon }) => {
   return (
     <Box>
       <Center>
-        <Card boxShadow='dark-lg' maxWidth='1000px'>
+        <Card boxShadow='dark-lg' border="10px solid #DEDEDE" maxWidth='1000px'>
           <CardHeader>
             <Center>
               <Heading>{pokemon.name.toUpperCase()}</Heading>

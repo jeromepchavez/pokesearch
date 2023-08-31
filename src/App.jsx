@@ -4,7 +4,6 @@ import axios from 'axios';
 import { Box, Heading, Center } from '@chakra-ui/react';
 import SearchBar from './components/SearchBar';
 import PokemonDetail from './components/PokemonDetail';
-import './css/App.css';
 
 export default function App() {
   const [selectedPokemon, setSelectedPokemon] = useState(null);
