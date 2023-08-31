@@ -11,7 +11,8 @@ import {
           VStack,
           Image,
           Badge,
-          Tag
+          Tag,
+          Text
         } from '@chakra-ui/react';
 import '../css/pokemontype.css'
 
@@ -21,17 +22,33 @@ const PokemonDetail = ({ pokemon }) => {
   }
 
   //Height is given in decimeters. Function to convert to feet/inches. divide height by 3.048
-  const calculateFeetInches = (height) => {
+  const calculateHeights = (height) => {
     const decimeterToFoot = 1/3.048;
     const feetWithInch = height * decimeterToFoot;
     const feet = feetWithInch - feetWithInch % 1;
     const inches = Math.round(feetWithInch % 1 * 12);
-    return feet + `' ` + inches + `"` 
+    const meters = height / 10;
+    return (
+      <Box>
+        <Text>{feet + `' ` + inches + `"`}</Text>
+        <Text>{meters + 'm'}</Text>
+      </Box>
+    )
   };
-
+  //API returns weight in hectograms. Will convert to pounds and kilograms
+ const calculateWeights = (weight) => {
+    const pounds = (weight / 4.536).toFixed(1);
+    const kilograms = (weight / 10).toFixed(1);
+    return (
+      <Box>
+        <Text>{pounds + 'lbs.'}</Text>
+        <Text>{kilograms + 'kg'}</Text>
+      </Box>
+    );
+  }
   const renderShiny = (shinyUrl) => {
     if (!shinyUrl) {
-      return <Heading size='md' boxSize='400px'>No Shiny Form Available</Heading>;
+      return <Heading size='md' boxSize='400px' marginTop='20px' textAlign='center'>No Shiny Form Available</Heading>;
     } else {
       return <Image borderRadius='5%' backgroundColor='#DEDEDE' boxSize='400px' src={pokemon.shinyUrl} alt={pokemon.name} />;
     }
@@ -84,9 +101,9 @@ const PokemonDetail = ({ pokemon }) => {
       <Center>
         <Card boxShadow='dark-lg' border="10px solid #DEDEDE" maxWidth='1000px'>
           <CardHeader>
-            <Center>
-              <Heading>{pokemon.name.toUpperCase()}</Heading>
-            </Center>
+            <Heading>
+              {pokemon.name.toUpperCase()}
+            </Heading>
           </CardHeader>
           <CardBody>
             <HStack margin ='10px' spacing='30px' justifyContent='center'>
@@ -109,11 +126,8 @@ const PokemonDetail = ({ pokemon }) => {
               </VStack>
               ))}
             </HStack>
-            <div>Height: {calculateFeetInches(pokemon.height)}</div>
-            <div>Weight: {
-              //Weight from the GET call is in hectograms. Converting to pounds
-              (pokemon.weight/4.536).toFixed(1)
-              } lbs.</div>
+            <Box>Height: {calculateHeights(pokemon.height)}</Box>
+            <Box>Weight: {calculateWeights(pokemon.weight)}</Box>
             <div>ID: {pokemon.pokemonID}</div>
             <div>Pokedex: {pokemon.pokedexEntry}</div>
             <div>Generation: {pokemon.generation}</div>

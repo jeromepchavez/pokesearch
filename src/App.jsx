@@ -37,6 +37,7 @@ export default function App() {
         pokemonID: response1.data.id,
         generation: response2.data.generation.name,
         pokedexEntry: findEnglishFlavorText(response2.data.flavor_text_entries),
+        foreignNames: response2.data.names.slice(0, 3),
       };
       console.log(pokemon)
       setSelectedPokemon(pokemon);
