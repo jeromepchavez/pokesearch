@@ -107,6 +107,9 @@ const PokemonDetail = ({ pokemon }) => {
         return "src/assets/pokemon-types/bug.svg"
     }
   }
+  const renderGeneration = (gen) => {
+    return gen.replace(/(.*)-/,"").toUpperCase();
+  }
 
   return (
     <Box>
@@ -151,7 +154,7 @@ const PokemonDetail = ({ pokemon }) => {
             </HStack>
             <HStack>
               <Box margin='10px'><Heading size='xs'>Pokemon ID: </Heading>{'No. ' + pokemon.pokemonID}</Box>
-              <Box margin='10px'><Heading size='xs'>Generation: </Heading>{pokemon.generation}</Box>
+              <Box margin='10px'><Heading size='xs'>Generation: </Heading><Text fontFamily='serif'>{renderGeneration(pokemon.generation)}</Text></Box>
             </HStack>
           </CardBody>
         </Card>
