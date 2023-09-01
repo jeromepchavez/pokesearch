@@ -5,7 +5,6 @@ import {
           Center, 
           Box,
           Card,
-          Flex,
           CardBody,
           HStack,
           VStack,
@@ -31,8 +30,8 @@ const PokemonDetail = ({ pokemon }) => {
     const meters = height / 10;
     return (
       <Box>
-        <Text>{feet + `' ` + inches + `"`}</Text>
-        <Text>{meters + 'm'}</Text>
+        <Text size='xs'>{feet + `' ` + inches + `"`}</Text>
+        <Text size='xs'>{meters + 'm'}</Text>
       </Box>
     )
   };
@@ -42,8 +41,8 @@ const PokemonDetail = ({ pokemon }) => {
     const kilograms = (weight / 10).toFixed(1);
     return (
       <Box>
-        <Text>{pounds + 'lbs.'}</Text>
-        <Text>{kilograms + 'kg'}</Text>
+        <Text size='xs'>{pounds + 'lbs.'}</Text>
+        <Text size='xs'>{kilograms + 'kg'}</Text>
       </Box>
     );
   }
@@ -64,7 +63,7 @@ const PokemonDetail = ({ pokemon }) => {
     if (!shinyUrl) {
       return <Heading size='md' boxSize='400px' marginTop='20px' textAlign='center'>No Shiny Form Available</Heading>;
     } else {
-      return <Image borderRadius='5%' backgroundColor='#DEDEDE' boxSize='400px' src={pokemon.shinyUrl} alt={pokemon.name} />;
+      return <Image boxSize='400px' src={pokemon.shinyUrl} alt={pokemon.name} />;
     }
   }
   //Function that also returns the corresponding image of the Pokemon type
@@ -112,12 +111,12 @@ const PokemonDetail = ({ pokemon }) => {
   return (
     <Box>
       <Center>
-        <Card boxShadow='dark-lg' border="10px solid #DEDEDE" maxWidth='1000px'>
-          <CardBody>
+        <Card boxShadow='dark-lg' maxWidth='1000px'>
+          <CardBody width='850px'>
             <HStack margin ='10px' spacing='30px' justifyContent='center'>
-              <VStack>
+              <VStack margin='10px'>
                 <Badge>ORIGINAL</Badge>
-                <Image  borderRadius='5%' backgroundColor='#DEDEDE' boxSize='400px' src={pokemon.imageUrl} alt={pokemon.name} />
+                <Image boxSize='400px' src={pokemon.imageUrl} alt={pokemon.name} />
               </VStack>
               <VStack>
                 <Badge colorScheme='purple'>SHINY</Badge>
@@ -145,11 +144,15 @@ const PokemonDetail = ({ pokemon }) => {
                 ))}
               </HStack>
             </HStack>
-            <Box>Height: {calculateHeights(pokemon.height)}</Box>
-            <Box>Weight: {calculateWeights(pokemon.weight)}</Box>
-            <div>ID: {pokemon.pokemonID}</div>
-            <div>Pokedex: {pokemon.pokedexEntry}</div>
-            <div>Generation: {pokemon.generation}</div>
+            <HStack>
+              <Box margin='10px'><Heading size='xs'>Height: </Heading> {calculateHeights(pokemon.height)}</Box>
+              <Box margin='10px'><Heading size='xs'>Weight: </Heading>{calculateWeights(pokemon.weight)}</Box>
+              <Box margin='10px'><Heading size='xs'>Pokedex: </Heading>{pokemon.pokedexEntry}</Box>
+            </HStack>
+            <HStack>
+              <Box margin='10px'><Heading size='xs'>Pokemon ID: </Heading>{'No. ' + pokemon.pokemonID}</Box>
+              <Box margin='10px'><Heading size='xs'>Generation: </Heading>{pokemon.generation}</Box>
+            </HStack>
           </CardBody>
         </Card>
       </Center>

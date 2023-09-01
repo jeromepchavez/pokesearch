@@ -61,7 +61,7 @@ export default function App() {
   return (
     <Box className='body'>
       <Center>
-        <Heading textShadow='1px 1px #ff0000' size='2xl' margin='20px'>Pokémon Search App</Heading>
+        <Heading textShadow='1px 1px #DEDEDE' size='2xl' margin='20px'>Pokémon Search App</Heading>
       </Center>
       <SearchBar onSearch={handleSearch} />
       <PokemonDetail pokemon={selectedPokemon} />
